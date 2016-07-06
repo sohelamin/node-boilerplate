@@ -6,7 +6,7 @@ module.exports = class Router {
     }
 
     route(pathname, callback, verb) {
-        verb = verb || 'get';
+        verb = verb || 'GET';
 
         this.handler[pathname] = {
             callback: callback,
@@ -15,10 +15,10 @@ module.exports = class Router {
     }
 
     get(pathname, callback) {
-        this.route(pathname, callback, 'get');
+        this.route(pathname, callback, 'GET');
     }
 
     post(pathname, callback) {
-        this.route(pathname, callback, 'post');
+        this.route(pathname, callback, 'POST');
     }
 }

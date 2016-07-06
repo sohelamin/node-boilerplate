@@ -29,9 +29,18 @@ module.exports = class Server {
         console.log('Request for ' + pathname + ' received.');
 
         if (router.handler.hasOwnProperty(pathname) && typeof router.handler[pathname].callback === 'function') {
+
+            if (req.method !== router.handler[pathname].verb) {
+                res.statusCode = 405;
+                res.write('405 Method Not Allowed');
+                res.end();
+            }
+
             return router.handler[pathname].callback(req, res);
         } else {
-            return '404 Not found';
+            res.statusCode = 404;
+            res.write('404 Not Found');
+            res.end();
         }
     }
 }
